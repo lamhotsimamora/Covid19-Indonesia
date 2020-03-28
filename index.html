@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="og:image"       content="assets/img/covid19-pdrtechnology.png" />
+    <meta property="og:image"       content="assets/img/covid19-pdrtechnology.png" />
+    <link rel="shortcut icon" type="image/png" href="icon.png"/>
+    <meta name="ROBOTS"       content="index"/>
+    <meta name="Author"       content="@lamhotsimamora | PDR Technology" />
+    <meta name="copyright"      content="Copyright@2020 | All Right Reserved" />
+    <meta property="og:title"     content="#dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia" />
+    <meta property="og:description" content="#dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia" />
+    <meta property="og:name"        content="#dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia" />
+    <meta name="language"         content="Indonesian, English" />
+    <meta name="distribution"       content="Global" />
+    <meta name="rating"         content="General" />
+    <meta name="expires"        content="1800" />
+    <meta name="theme-color"        content="#2980b9"> 
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>
+     #dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia
+    </title>
+   <style>
+    [v-cloak] {
+    display: none;
+    }
+    </style> 
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://www.cdn.lamhotsimamora.com/garuda2/"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+      <a class="navbar-brand" href="."  style="color: white">Home</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          
+          <li class="nav-item active">
+            <a class="nav-link" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019/advice-for-public" target="_blank" style="color: white">WHO <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="https://covid19.kemkes.go.id/" target="_blank"  style="color: white">Kemenkes Covid19<span class="sr-only">(current)</span></a>
+          </li>
+         
+        </ul>
+      </div>
+    </nav>
+<br>
+  
+    <div class="container" id="loading">
+         <div class="mx-auto" v-if="show">
+            <img class="rounded mx-auto d-block" src="assets/img/index.svg" alt="" width="60" height="60">
+         </div>
+    </div>
+  
+    <div class="container" id="app" v-cloak>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Pilih Negara</label>
+        </div>
+        <select class="custom-select" v-model="country" @change="selectCountry">
+            <option v-for="country in data_country" :value="country.Code">{{ country.Name }}</option>
+        </select>
+      </div>
+    
+        <div class="card">
+          <h5 class="card-header"><img :src="data_indonesia.countryInfo['flag']" alt="" width="20" height="15"> | Negara {{ data_indonesia.country }}  </h5>
+          <div class="card-body">
+            <h5 class="card-title"></h5>
+            <p class="card-text">
+                <ul class="list-group">
+                  <li class="list-group-item">Total Kasus : <h3><strong style="color: #34495e">{{ _moneyFormat(data_indonesia.cases) }} orang</strong></h3></li>
+                  <li class="list-group-item">Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_indonesia.deaths) }} orang</strong></h3></li>
+                  <li class="list-group-item">Sembuh : <h3><strong style="color: #27ae60">{{ _moneyFormat(data_indonesia.recovered) }} orang</strong></h3></li>
+                </ul>
+          <hr>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-info">Kasus Hari ini : <h3><strong style="color: #34495e">{{ data_indonesia.todayCases }} orang</strong></h3></li>
+                  <li class="list-group-item list-group-item-info">Meninggal Hari ini : <h3><strong style="color: #e74c3c">{{ data_indonesia.todayDeaths }} orang</strong></h3></li>
+                </ul>
+            </p>
+            
+          </div>
+        </div>
+    </div>
+    <br>
+    <div class="container" id="app2" v-cloak>
+       <div class="jumbotron">
+          <h5>Data Real Covid19 / Corona Seluruh Negara</h5>
+        <hr>
+        <h6>Total Kasus : <h3><strong style="color: #34495e">{{ _moneyFormat(data_all_count.cases,'')  }} orang</h6></strong></h3> <br>
+        <h6>Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_all_count.deaths,'')  }} orang</strong></h3></h6> <br>
+        <h6>Total Sembuh : <h3><strong style="color: #27ae60">{{ _moneyFormat(data_all_count.recovered,'')  }} orang</strong></h3></h6> <br>
+       </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="js/server.js"></script>
+    <script src="js/index.js"></script>
+  </body>
+</html>
