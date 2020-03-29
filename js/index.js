@@ -27,7 +27,6 @@ let $app = new Vue({
 				url : API_DATE
 			}).request($response=>{
 				if ($response){
-					let $obj = JSON.parse($response);
 					this.tanggal = $obj;
 				}
 			});
