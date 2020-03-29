@@ -70,7 +70,13 @@ let $app = new Vue({
 		},
 		selectCountry: function(){
 			$loading.show =true;
-			this.data_indonesia = []
+			this.data_indonesia = {
+				cases  : 0,
+				deaths : 0,
+				recovered : 0,
+				todayCases : 0,
+				todayDeaths : 0
+			};
 			this.loadData(this.country)
 		}
 	},
