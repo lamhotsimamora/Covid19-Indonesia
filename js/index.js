@@ -68,6 +68,7 @@ let $app = new Vue({
 		},
 		selectCountry: function(){
 			$loading.show =true;
+			this.country_flag = null;
 			this.data_indonesia = {
 				cases  : 0,
 				deaths : 0,

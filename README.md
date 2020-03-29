@@ -1,8 +1,8 @@
 # Covid19-Indonesia
 
-Data virus Covid19 / Corona Indonesia
+Data real kasus virus Covid19 / Corona di Indonesia & berbagai negara di dunia
 
-# Sumber data
+# Resource data
 
 - <a href="https://github.com/novelcovid/api">novelcovid</a>
 - <a href="https://github.com/pomber/covid19">pomber</a>
