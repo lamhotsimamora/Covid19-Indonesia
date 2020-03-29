@@ -28,8 +28,7 @@ let $app = new Vue({
 			}).request($response=>{
 				if ($response){
 					let $obj = JSON.parse($response);
-					let $tgl = $obj.utc_datetime.substring(0, 10);
-					this.tanggal = $tgl;
+					this.tanggal = $obj;
 				}
 			});
 		},
