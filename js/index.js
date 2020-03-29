@@ -1,3 +1,4 @@
+
 let $loading = new Vue({
 	el : '#loading',
 	data : {
@@ -8,17 +9,52 @@ let $loading = new Vue({
 let $app = new Vue({
 	el : '#app',
 	data : {
-		data_indonesia : [],
+		data_indonesia : {
+			cases  : 0,
+			deaths : 0,
+			recovered : 0,
+			todayCases : 0,
+			todayDeaths : 0
+		},
 		country : null,
-		data_country  : []
+		data_country  : null,
+		country_flag : null,
+		tanggal : null
 	},
 	methods : {
+		getDate : function(){
+			__({
+				url : API_DATE
+			}).request($response=>{
+				if ($response){
+					let $obj = JSON.parse($response);
+					let $tgl = $obj.utc_datetime.substring(0, 10);
+					this.tanggal = $tgl;
+				}
+			});
+		},
 		loadData : function($country="ID"){
 			__({
 				url : API_Covid  + $country
-			}).request($response=>{
-				this.data_indonesia = JSON.parse($response);
-				$loading.show=false
+			}).request( ($response,$status,$code) =>{
+				
+				if ($response){
+					let $obj = JSON.parse($response);
+					
+					if ($obj.message){
+						this.data_indonesia = [];
+						Swal.fire({
+						  icon: 'error',
+						  title: 'Oops...',
+						  text:  $obj.message,
+						  footer: ''
+						})
+					}else{
+						this.data_indonesia = $obj;
+						this.country_flag = $obj.countryInfo.flag;
+					}
+					$loading.show=false
+				}
 			});
 
 		},
@@ -26,7 +62,10 @@ let $app = new Vue({
 			__({
 				url : 'assets/country.json'
 			}).request($response=>{
-				this.data_country = JSON.parse($response);
+				if ($response){
+					let $obj = JSON.parse($response);
+					this.data_country = $obj;
+				}
 			});
 		},
 		selectCountry: function(){
@@ -38,13 +77,18 @@ let $app = new Vue({
 	mounted: function(){
 		this.loadCountry()
 		this.loadData()
+		this.getDate()
 	}
 });
 
 let $app2 = new Vue({
 	el : '#app2',
 	data : {
-		data_all_count : []
+		data_all_count : {
+			cases : 0,
+			recovered : 0,
+			deaths : 0
+		}
 	},
 	methods : {
 		loadAllCount : function(){

@@ -21,7 +21,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>
      #dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia
     </title>
@@ -65,6 +65,10 @@
     </div>
   
     <div class="container" id="app" v-cloak>
+      <div class="alert alert-secondary" role="alert">
+        Tanggal :  <strong>{{ tanggal }}</strong>
+      </div>
+
       <div class="input-group mb-3">
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">Pilih Negara</label>
@@ -75,14 +79,14 @@
       </div>
     
         <div class="card">
-          <h5 class="card-header"><img :src="data_indonesia.countryInfo['flag']" alt="" width="20" height="15"> | Negara {{ data_indonesia.country }}  </h5>
+          <h5 class="card-header"><img :src="country_flag" alt="" width="20" height="15"> | Negara {{ data_indonesia.country }}  </h5>
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">
                 <ul class="list-group">
-                  <li class="list-group-item">Total Kasus : <h3><strong style="color: #34495e">{{ _moneyFormat(data_indonesia.cases) }} orang</strong></h3></li>
-                  <li class="list-group-item">Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_indonesia.deaths) }} orang</strong></h3></li>
-                  <li class="list-group-item">Sembuh : <h3><strong style="color: #27ae60">{{ _moneyFormat(data_indonesia.recovered) }} orang</strong></h3></li>
+                  <li class="list-group-item">Total Kasus : <h3><strong style="color: #34495e">{{ _moneyFormat(data_indonesia.cases,'') }} orang</strong></h3></li>
+                  <li class="list-group-item">Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_indonesia.deaths,'') }} orang</strong></h3></li>
+                  <li class="list-group-item">Sembuh : <h3><strong style="color: #27ae60">{{ _moneyFormat(data_indonesia.recovered,'') }} orang</strong></h3></li>
                 </ul>
           <hr>
                 <ul class="list-group">
@@ -99,9 +103,9 @@
        <div class="jumbotron">
           <h5>Data Real Covid19 / Corona Seluruh Negara</h5>
         <hr>
-        <h6>Total Kasus : <h3><strong style="color: #34495e">{{ _moneyFormat(data_all_count.cases,'')  }} orang</h6></strong></h3> <br>
+        <h6>Total Kasus : <h3><strong style="color: #34495e">{{  _moneyFormat(data_all_count.cases,'')  }} orang</h6></strong></h3> <br>
         <h6>Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_all_count.deaths,'')  }} orang</strong></h3></h6> <br>
-        <h6>Total Sembuh : <h3><strong style="color: #27ae60">{{ _moneyFormat(data_all_count.recovered,'')  }} orang</strong></h3></h6> <br>
+        <h6>Total Sembuh : <h3><strong style="color: #27ae60">{{  _moneyFormat(data_all_count.recovered,'')  }} orang</strong></h3></h6> <br>
        </div>
     </div>
 
