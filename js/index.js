@@ -27,7 +27,7 @@ let $app = new Vue({
 				url : API_DATE
 			}).request($response=>{
 				if ($response){
-					this.tanggal = $obj;
+					this.tanggal = $response;
 				}
 			});
 		},
