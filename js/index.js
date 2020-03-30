@@ -1,10 +1,5 @@
 
-let $loading = new Vue({
-	el : '#loading',
-	data : {
-		show : true
-	}
-});
+
 
 let $app = new Vue({
 	el : '#app',
@@ -19,7 +14,8 @@ let $app = new Vue({
 		country : null,
 		data_country  : null,
 		country_flag : null,
-		tanggal : null
+		tanggal : null,
+		btn_provinsi : true
 	},
 	methods : {
 		getDate : function(){
@@ -35,7 +31,11 @@ let $app = new Vue({
 			__({
 				url : API_Covid  + $country
 			}).request( ($response,$status,$code) =>{
-				
+				if ($country==='ID'){
+					this.btn_provinsi = true;
+				}else{
+					this.btn_provinsi = false;
+				}
 				if ($response){
 					let $obj = JSON.parse($response);
 					

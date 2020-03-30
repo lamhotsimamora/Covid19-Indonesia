@@ -10,9 +10,9 @@
     <meta name="ROBOTS"       content="index"/>
     <meta name="Author"       content="@lamhotsimamora | PDR Technology" />
     <meta name="copyright"      content="Copyright@2020 | All Right Reserved" />
-    <meta property="og:title"     content="#dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia" />
-    <meta property="og:description" content="#dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia" />
-    <meta property="og:name"        content="#dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia" />
+    <meta property="og:title"     content="#dirumahAja | Data Kasus Covid19 Berdasarkan #Provinsi Indonesia" />
+    <meta property="og:description" content="#dirumahAja | Data Kasus Covid19 Berdasarkan #Provinsi Indonesia" />
+    <meta property="og:name"        content="#dirumahAja | Data Kasus Covid19 Berdasarkan #Provinsi Indonesia" />
     <meta name="language"         content="Indonesian, English" />
     <meta name="distribution"       content="Global" />
     <meta name="rating"         content="General" />
@@ -23,7 +23,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title>
-     #dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia
+     #dirumahAja | Data Kasus Covid19 Berdasarkan #Provinsi Indonesia
     </title>
    <style>
     [v-cloak] {
@@ -34,7 +34,6 @@
     <script src="https://www.cdn.lamhotsimamora.com/garuda2/"></script>
   </head>
   <body>
-  
   <div id="_header">
     
   </div>
@@ -52,54 +51,43 @@
         Tanggal :  <strong>{{ tanggal }}</strong>
       </div>
 
-      <div class="input-group mb-3">
-        <div class="input-group-prepend">
-          <label class="input-group-text" for="inputGroupSelect01">Pilih Negara</label>
-        </div>
-        <select class="custom-select" v-model="country" @change="selectCountry">
-            <option v-for="country in data_country" :value="country.Code">{{ country.Name }}</option>
-        </select>
+      <div class="alert alert-primary" role="alert">
+        Data dibawah ini berasal dari <a href="https://kawalcorona.com/" target="_blank">KawalCorona</a>
       </div>
-    
-        <div class="card">
-          <h5 class="card-header"><img :src="country_flag" alt="" width="20" height="15"> | Negara {{ data_indonesia.country }}  </h5>
+<hr>
+       <!-- looping data -->
+       <div  v-for="(provinsi) in data_provinsi">
+        <div class="card text-white bg-primary  mb-3">
+          <h5 class="card-header"><strong>{{ provinsi.attributes['Provinsi'] }} </strong></h5>
           <div class="card-body">
             <h5 class="card-title"></h5>
             <p class="card-text">
                 <ul class="list-group">
-                  <li class="list-group-item">Total Kasus : <h3><strong style="color: #34495e">{{ _moneyFormat(data_indonesia.cases,'') }} orang</strong></h3></li>
-                  <li class="list-group-item">Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_indonesia.deaths,'') }} orang</strong></h3></li>
-                  <li class="list-group-item">Sembuh : <h3><strong style="color: #27ae60">{{ _moneyFormat(data_indonesia.recovered,'') }} orang</strong></h3></li>
+                  <li class="list-group-item list-group-item-action list-group-item-primary">Total Kasus : <h3><strong style="color: #34495e">{{ (provinsi.attributes['Kasus_Posi']) }} orang</strong></h3></li>
+                  <li class="list-group-item list-group-item-action list-group-item-primary">Total Meninggal : <h3><strong style="color: #e74c3c">{{ (provinsi.attributes['Kasus_Meni']) }} orang</strong></h3></li>
+                  <li class="list-group-item list-group-item-action list-group-item-primary">Sembuh : <h3><strong style="color: #27ae60">{{ (provinsi.attributes['Kasus_Semb']) }} orang</strong></h3></li>
                 </ul>
-               <hr>
             </p>
-            <div v-if="btn_provinsi"><a href="provinsi.html" class="btn btn-primary btn-sm">Berdasarkan Provinsi</a></div>
           </div>
         </div>
-    </div>
-    <br>
-    <div class="container" id="app2" v-cloak>
-       <div class="jumbotron">
-          <h5>Data Real Covid19 / Corona Seluruh Negara</h5>
-        <hr>
-        <h6>Total Kasus : <h3><strong style="color: #34495e">{{  _moneyFormat(data_all_count.cases,'')  }} orang</h6></strong></h3> <br>
-        <h6>Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_all_count.deaths,'')  }} orang</strong></h3></h6> <br>
-        <h6>Total Sembuh : <h3><strong style="color: #27ae60">{{  _moneyFormat(data_all_count.recovered,'')  }} orang</strong></h3></h6> <br>
-       </div>
+        <br>
+        </div>
+       <!-- looping data -->
+
     </div>
 
-    <footer class="footer mt-auto py-3">
+     <footer class="footer mt-auto py-3">
       <div class="container">
         <span class="text-muted">#dirumahAja | developed by <a href="https://github.com/lamhotsimamora">@lamhotsimamora</a> | <a href="https://github.com/lamhotsimamora/Covid19-Indonesia">Repository</a> | Copyright@2020</span>
       </div>
     </footer>
-
+   
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <script src="js/server.js"></script>
-    <script src="js/index.js"></script>
+    <script src="js/provinsi.js"></script>
   </body>
 </html>
