@@ -21,7 +21,12 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css">
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+
     <title>
      #dirumahAja | Data Real Kasus Virus Corona / Covid 19 Indonesia
     </title>
@@ -78,15 +83,18 @@
         </div>
     </div>
     <br>
-    <div class="container" id="app2" v-cloak>
-       <div class="jumbotron">
-          <h5>Data Real Covid19 / Corona Seluruh Negara</h5>
-        <hr>
-        <h6>Total Kasus : <h3><strong style="color: #34495e">{{  _moneyFormat(data_all_count.cases,'')  }} orang</h6></strong></h3> <br>
-        <h6>Total Meninggal : <h3><strong style="color: #e74c3c">{{ _moneyFormat(data_all_count.deaths,'')  }} orang</strong></h3></h6> <br>
-        <h6>Total Sembuh : <h3><strong style="color: #27ae60">{{  _moneyFormat(data_all_count.recovered,'')  }} orang</strong></h3></h6> <br>
-       </div>
+    <div class="container">
+      <hr>
     </div>
+ <br>
+    <div class="container chart-container">
+      <div class="alert alert-primary" role="alert">
+        Data Real : Total Kasus Covid19 di Dunia
+      </div>
+         <canvas id="chart_covid"></canvas>
+    </div>
+
+    <br><br>
 
     <footer class="footer mt-auto py-3">
       <div class="container">
@@ -98,6 +106,8 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 
     <script src="js/server.js"></script>
     <script src="js/index.js"></script>

@@ -1,5 +1,4 @@
-
-
+const ctx = document.getElementById('chart_covid');
 
 let $app = new Vue({
 	el : '#app',
@@ -63,6 +62,7 @@ let $app = new Vue({
 				if ($response){
 					let $obj = JSON.parse($response);
 					this.data_country = $obj;
+
 				}
 			});
 		},
@@ -86,26 +86,44 @@ let $app = new Vue({
 	}
 });
 
-let $app2 = new Vue({
-	el : '#app2',
-	data : {
-		data_all_count : {
-			cases : 0,
-			recovered : 0,
-			deaths : 0
-		}
-	},
-	methods : {
-		loadAllCount : function(){
-			__({
-				url : API_Covid_All_Country_Count
-			}).request($response=>{
-				this.data_all_count = JSON.parse($response);
-				$loading.show=false
-			});
-		}
-	},
-	mounted: function(){
-		this.loadAllCount()
-	}
+__({
+	url : API_Covid_All_Country_Count
+}).request($response=>{
+
+	const $data = JSON.parse($response);
+		
+	var myChart = new Chart(ctx, {
+	    type: 'pie',
+	    data: {
+	        labels: ['Jumlah Kasus ('+_moneyFormat($data.cases,'')+")",
+	        		 'Sembuh ('+_moneyFormat($data.recovered,'')+")", 
+	        		 	'Meninggal ('+_moneyFormat($data.deaths,'')+")"],
+	        datasets : [{
+	            label: '#',
+	            data : [$data.cases, $data.recovered, $data.deaths],
+	            backgroundColor: [
+	                'rgba(63, 127, 191, 1)',
+	                'rgba(63, 191, 63, 1)',
+	                'rgba(191, 63, 63, 1)',
+	            ],
+	            borderColor: [
+	                'rgba(255, 99, 132, 1)',
+	                'rgba(54, 162, 235, 1)',
+	                'rgba(255, 206, 86, 1)',
+	            ],
+	            borderWidth: 0
+	        }]
+	    },
+	    options: {
+	        scales: {
+	            yAxes: [{
+	                ticks: {
+	                    beginAtZero: true
+	                }
+	            }]
+	        }
+	    }
+	});
+
+	$loading.show=false
 });
